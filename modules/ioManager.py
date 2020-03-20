@@ -1,4 +1,4 @@
-﻿import os, math, psutil
+﻿import os, math, shutil
 from dataclasses import dataclass
 
 folder = "d/"
@@ -12,9 +12,8 @@ def WriteFile(name, data):
     if not os.path.exists(os.path.dirname(path)):
         try:
             os.makedirs(os.path.dirname(path))
-        except OSError as exc: # Guard against race condition
-            if exc.errno != errno.EEXIST:
-                raise
+        except OSError: # Guard against race condition
+            pass
     
     with open(path, "wb") as f:
         f.write(data)
